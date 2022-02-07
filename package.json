@@ -1,0 +1,39 @@
+{
+  "name": "ulti-lobby",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "jest",
+    "pack": "electron-builder --dir",
+    "build": "electron-builder -wl --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^12.2.3",
+    "electron-builder": "22.9.1",
+    "eslint": "^8.6.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^26.2.2"
+  },
+  "dependencies": {
+    "deep-diff": "^1.0.2",
+    "discord-rpc": "^3.1.4",
+    "electron-store": "^8.0.1",
+    "messenger": "0.0.9",
+    "ws": "^8.4.0"
+  },
+  "build": {
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "asar": true,
+      "asarUnpack": [
+        "assets"
+      ]
+    },
+    "portable": {
+      "artifactName": "lobby.exe"
+    }
+  }
+}

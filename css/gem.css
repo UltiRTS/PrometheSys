@@ -1,0 +1,19 @@
+.gemRing{	
+	height:3vh;width:3vh;top:-0.6vh;left:-0.6vh;
+	animation-fill-mode: forwards;
+	animation-name: gemRing;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-delay:0s;
+	/*animation-timing-function: cubic-bezier(0.95, 0, 0.24, 0.88);*/
+	
+}
+
+@keyframes gemRing {
+	0%   {height:0.75vh;width:0.75vh;top:-0.275vh;left:-0.275vh;opacity:1;}
+	
+
+
+	20%   {height:2.5vh;width:2.5vh;top:-1.1vh;left:-1.1vh;opacity:0;}
+	100%   {height:2.5vh;width:2.5vh;top:-1.1vh;left:-1.1vh;opacity:0;}
+}

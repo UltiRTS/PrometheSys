@@ -1,0 +1,17 @@
+.flashyCursor{
+    
+	animation-fill-mode: forwards;
+	animation-name: flashyCursor;
+	animation-duration: 0.15s;
+	animation-iteration-count: infinite;
+	animation-delay:0s;
+	
+}
+
+@keyframes flashyCursor{
+    
+	0%   {opacity:0;}
+    50%   {opacity:0;}
+    51%   {opacity:1;}
+	100%   {opacity:1;}
+} 

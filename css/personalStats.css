@@ -1,0 +1,84 @@
+.personalStatsQAExp{
+    height:0px;opacity:0;
+    animation-fill-mode: forwards;
+        animation-name: personalStatsQAExp;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+        animation-delay:0s;
+        animation-timing-function: cubic-bezier(0.95, 0, 0.24, 0.88);
+    }
+    
+    @keyframes personalStatsQAExp {
+        
+        0%   {height:0px;opacity:0;}
+        95%   {opacity:0.5;}
+        100%   {opacity:1;height:100px;}
+    }
+
+    .personalStatsQAContent{
+       opacity:0;
+        animation-fill-mode: forwards;
+            animation-name: personalStatsQAContent;
+            animation-duration: 0.25s;
+            animation-iteration-count: 1;
+            animation-delay:0.5s;
+            /*animation-timing-function: cubic-bezier(0.95, 0, 0.24, 0.88);*/
+        }
+        
+        @keyframes personalStatsQAContent {
+            
+            0%   {opacity:1;}
+            50%   {opacity:1}
+            51%   {opacity:0}
+            99%   {opacity:0}
+            100%   {opacity:1}
+        }
+
+
+
+    .personalStatsQAShrk{
+        opacity:0;
+height:0%;
+}
+
+
+.psqabg{
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: psqabg;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay:0.5s;
+}
+
+.psqabg2{
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: psqabg;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay:0.6s;
+}
+
+.psqabg3{
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: psqabg;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay:0.7s;
+	
+}
+
+@keyframes psqabg {
+	0%   {background:rgba(255,255,255,0)}
+	25%   {background:rgba(255,255,255,1)}
+	50%   {background:rgba(255,255,255,0)}
+	51%   {background:rgba(0,0,0,0)}
+	100%   {background:rgba(0,0,0,0)}
+}
+
+.personalStatsQASubContent:hover{
+    background: #ffffff1c;
+
+} 

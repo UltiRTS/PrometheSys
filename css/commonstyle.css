@@ -1,0 +1,802 @@
+
+.emptyStyle{
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
+
+/*to use this, 
+<div class="button-block">
+    <button id="random">Random</button>
+</div>*/
+
+.button-block {
+  display: inline-block;
+  border-left: 10px solid rgba(70, 66, 47, 0.75);
+  padding: 0 30px;
+  position: relative;
+}
+.button-block::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  top: 0;
+  height: 100%;
+  left: 4px;
+  background: rgba(70, 66, 47, 0.75);
+}
+
+button {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 2px solid transparent;
+  color: #46422f;
+  background: transparent;
+  border-style: solid none;
+  margin: 0 auto;
+  display: block;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1em;
+  padding: 10px 20px;
+  min-width: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s;
+  text-align: left;
+}
+button::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 10px);
+  left: 0px;
+  top: 5px;
+  background: transparent linear-gradient(to right, #46422f 50%, rgba(70, 66, 47, 0.75) 50%, rgba(70, 66, 47, 0.25) 100%) 100% 0/200% 100% no-repeat;
+  transition: all 0.35s;
+  z-index: -1;
+}
+button::after {
+  content: "";
+  display: inline-block;
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin: 2.5px 10px 2.5px 0;
+  background: currentColor;
+  border-right: 0.1x solid #46422f;
+}
+button:hover, button:focus,.button-clicked {
+  color: #c9c3ab;
+  border-color: #46422f;
+}
+button:focus ,button-clicked {
+  border-color: transparent;
+  opacity: 0.8;
+  outline: none;
+}
+button:hover::before, button:focus::before,.button-clicked:before {
+  background-position-x: 0;
+}
+button:focus::before,.button-clicked:before {
+  padding-right: 30px;
+}
+
+
+
+button + button {
+  margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  select, option {
+    text-align: center;
+    text-align-last: center;
+  }
+}
+
+
+
+
+
+
+
+
+/*SLIDER*/
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	input[type='range'] {
+		overflow:hidden;
+		width: 200%;
+		-webkit-appearance: none;
+		background-color: #ffffff;
+	}
+	
+	input[type='range']::-webkit-slider-runnable-track {
+		height: 5px;
+		-webkit-appearance: none;
+		color: #2196f3;
+		margin-top: -1px;
+	}
+	
+	input[type='range']::-webkit-slider-thumb {
+		width: 0px;
+		-webkit-appearance: none;
+		height: 0px;
+		cursor: ew-resize;
+		background: #2196f3;
+		box-shadow: -80000px 0 0 80000px #2196f3;
+	}
+	
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+	background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+	background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+	background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+	background-color: #9a905d;
+}
+
+.Bar{
+	
+	animation-fill-mode: forwards;
+	animation-name: barFill;
+	animation-duration: 0.7s;
+	animation-iteration-count: 1;
+	animation-delay:0s;
+}
+
+@keyframes barFill {
+	
+	0%   {width: 0%;}
+	70%   {width: 30%;}
+	100%   {width: 60%;}
+}
+
+
+
+
+
+.flyout:not(.old-school) {
+	animation: flyout 0.5s ease forwards;
+	opacity: 0.85;
+	transform: scale(1);
+	/* SEE NOTE IN JAVASCRIPT */
+	-webkit-filter: blur(0);
+	display:inline;
+	display:inline-block;
+	position: relative;
+}
+
+@keyframes flyout {
+	to {
+		-webkit-filter: blur(4px);
+		transform: scale(2);
+		opacity: 0;
+		mix-blend-mode: screen;
+	}
+}
+
+.flyin:not(.old-school) {
+	animation: flyin 0.5s ease forwards;
+	opacity: 0;
+	transform: scale(2);
+	/* SEE NOTE IN JAVASCRIPT */
+	-webkit-filter: blur(4px);
+	display:inline;
+	display:inline-block;
+	position: relative;
+}
+
+@keyframes flyin {
+	to {
+		-webkit-filter: blur(0);
+		transform: scale(1);
+		opacity: 0.85;
+		mix-blend-mode: screen;
+	}
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!TO USE THE BELOW, DECLARE "flashit" in class!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+.flashit{
+	-webkit-animation: flash linear 0.11s 4;
+	animation: flash linear 0.11s 4;
+}
+@-webkit-keyframes flash {
+	0% { opacity: 1; } 
+	50% { opacity: .1; } 
+	100% { opacity: 1; }
+}
+@keyframes flash {
+	0% { opacity: 1; } 
+	50% { opacity: .1; } 
+	100% { opacity: 1; }
+}
+
+
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!TO USE THE BELOW, DECLARE "pure-button fuller-button blue" in class!!!! */
+/* !!!!!class name blue can be red and white!!!!!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+/* !!!!!!!!!!!!!!!!!!!!!! */
+
+.flex-grid-center {
+	display: flex;
+	justify-content: center;
+	margin: 5em 0;
+}
+
+.fuller-button {
+	color: white;
+	background: none;
+	border-radius: 0;
+	padding: 1.2em 5em;
+	letter-spacing: 0.35em;
+	font-size: 0.7em;
+	transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+	margin: 1em;
+}
+.fuller-button.blue {
+	box-shadow: inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5);
+	border: #0dd solid 2px;
+}
+.fuller-button.blue:hover {
+	background-color: #0dd;
+	box-shadow: inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7);
+}
+.fuller-button.red {
+	box-shadow: inset 0 0 1em rgba(251, 81, 81, 0.4), 0 0 1em rgba(251, 81, 81, 0.4);
+	border: #fb5454 solid 2px;
+}
+.fuller-button.red:hover {
+	background-color: #fb5454;
+	box-shadow: inset 0 0 0 rgba(251, 81, 81, 0.4), 0 0 1.5em rgba(251, 81, 81, 0.6);
+}
+.fuller-button.white {
+	box-shadow: inset 0 0 0.8em rgba(255, 255, 255, 0.3), 0 0 0.8em rgba(255, 255, 255, 0.3);
+	border: #fff solid 2px;
+}
+.fuller-button.white:hover {
+	color: rgba(0, 0, 0, 0.8);
+	background-color: #fff;
+	box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3), 0 0 1.2em rgba(255, 255, 255, 0.5);
+}
+
+.pure-control-group {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding: 0 1em 2.6em 1em;
+}
+
+.pure-form .pure-control-group label {
+	text-align: left;
+	position: absolute;
+	left: 0;
+	top: 15%;
+	z-index: 0;
+	letter-spacing: 0;
+	margin: 0 1em;
+}
+
+.pure-form .pure-control-group input {
+	background: none;
+	box-shadow: none;
+	padding-left: 0;
+	border-radius: 0;
+	border: none;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+	position: relative;
+	z-index: 1;
+	color: #fff;
+}
+
+.pure-form .pure-control-group input:focus {
+	border-bottom: 2px solid white;
+}
+
+.pure-form .pure-control-group textarea {
+	background: none;
+	box-shadow: none;
+	border-radius: 0;
+	border: none;
+	border-left: 2px solid rgba(255, 255, 255, 0.4);
+	resize: none;
+	height: 8em;
+	color: #fff;
+}
+
+.pure-form .pure-control-group textarea:focus {
+	border-left: 2px solid white;
+}
+
+.pure-form .pure-control-group input[type=email]:focus:invalid {
+	color: #fff;
+}
+
+.pure-form .pure-control-group input[type=email]:invalid {
+	color: #fb5454;
+}
+
+.pure-form button {
+	margin: 0.5em 1em;
+}
+
+
+
+.slidingMenuSub1{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:0%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub1Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 0s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+}
+
+@keyframes slidingMenuSub1Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub1:hover {
+	opacity: 1;
+}
+.slidingMenuSub2{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:14%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub2Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 0.2s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub2Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub2:hover {
+	opacity: 1;
+}
+.slidingMenuSub3{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:28%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub3Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 0.4s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub3Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub3:hover {
+	opacity: 1;
+}
+.slidingMenuSub4{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:42%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub4Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 0.6s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub4Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub4:hover {
+	opacity: 1;
+}
+.slidingMenuSub5{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:56%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub5Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 0.8s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub5Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub5:hover {
+	opacity: 1;
+}
+.slidingMenuSub6{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:50%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub6Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 1s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub6Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub6:hover {
+	opacity: 1;
+}
+.slidingMenuSub7{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:60%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub7Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 1.2s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub7Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub7:hover {
+	opacity: 1;
+}
+.slidingMenuSub8{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:70%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub8Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 1.4s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub8Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub8:hover {
+	opacity: 1;
+}
+.slidingMenuSub9{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:80%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub9Anime;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay: 1.6s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub9Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub9:hover {
+	opacity: 1;
+}
+.slidingMenuSub10{
+	mix-blend-mode: screen; 
+	font-size:160%;
+	background-image:url('assets/miniArrowBtn.png');
+	
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	color:black;
+	
+	top:90%;
+	height:11.1%;
+	position:absolute;
+	animation-name: slidingMenuSub10Anime;
+	animation-duration: 0.45s;
+	animation-iteration-count: 1;
+	animation-delay: 1.8s;
+	left:0%;
+	animation-fill-mode: backwards;
+	line-height: 1;
+	vertical-align: middle;
+	opacity: 0.7;
+	
+}
+
+@keyframes slidingMenuSub10Anime{
+	0% {left:100%; opacity:0;}
+	30% {
+		left:0%;
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 1;
+	}
+	100%{
+		left:0%;
+		background-image:url('assets/miniArrowBtn.png');
+		mix-blend-mode: screen; 
+		color:black;
+		opacity: 0.7;
+	}
+}
+.slidingMenuSub10:hover {
+	opacity: 1;
+}
+
+hr { 
+	border: 0; 
+	height: 1px; 
+	background-image: -webkit-linear-gradient(left,#8c8b8b, #f0f0f0, #8c8b8b);
+	background-image: -moz-linear-gradient(left,#8c8b8b, #f0f0f0, #8c8b8b);
+	background-image: -ms-linear-gradient(left,#8c8b8b, #f0f0f0, #8c8b8b);
+	background-image: -o-linear-gradient(left,#8c8b8b, #f0f0f0, #8c8b8b);
+}
+
+@keyframes cursorFlash {
+	
+	0%   {opacity:0;}
+	
+	
+	51% {opacity:0;}
+	52%  {opacity:1;}
+	100% {opacity:1;}
+}
+
+
+
+/* The element to apply the animation to */
+.cursorFlash {
+	
+	
+	animation-name: flash;
+	animation-duration: 0.6s;
+	animation-iteration-count: infinite;
+}
+

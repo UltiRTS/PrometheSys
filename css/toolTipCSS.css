@@ -1,0 +1,129 @@
+
+  .toolTipWindow {
+    
+    cursor: move;
+    height:20px;
+    border-radius: 3px;
+    position: absolute;
+
+    /*transform: translate(-50%, -50%);*/
+    transform: skew(.312rad);
+  }
+
+  .toolTipWindowExp {
+    
+    cursor: move;
+    
+    border-radius: 3px;
+    position: absolute;
+
+    /*transform: translate(-50%, -50%);*/
+    transform: skew(.312rad);
+    animation-fill-mode: forwards;
+    animation-name: toolTipWindowExp;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+    animation-delay:0s;
+    animation-timing-function: cubic-bezier(0.95, 0, 0.24, 0.88);
+  }
+  
+  @keyframes toolTipWindowExp {
+    0%   {height:20px;}
+  
+    100%   {height:224px;}
+  }
+
+
+
+  .toolTipMinimize{
+    background: rgba(255,255,255,0.4);;
+}
+
+.toolTipMinimize:hover{
+  background: rgb(255, 0, 0);
+}
+
+.ttblock{
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: ttblock;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay:0.5s;
+}
+
+.ttblock2{
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: ttblock;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay:0.6s;
+}
+
+.ttblock3{
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: ttblock;
+	animation-duration: 0.35s;
+	animation-iteration-count: 1;
+	animation-delay:0.7s;
+	
+}
+
+@keyframes ttblock {
+	0%   {background:rgba(255,255,255,0)}
+	25%   {background:rgba(255,255,255,1)}
+	50%   {background:rgba(255,255,255,0)}
+	51%   {background:rgba(0,0,0,0)}
+	100%   {background:rgba(0,0,0,0.5)}
+}
+
+
+.actualHelpBG{
+  height:200px;
+	opacity:1;
+	animation-fill-mode: forwards;
+	animation-name: actualHelpBG;
+	animation-duration: 0.7s;
+	animation-iteration-count: 1;
+	animation-delay:0s;
+	animation-timing-function: cubic-bezier(0.95, 0, 0.24, 0.88);
+}
+
+@keyframes actualHelpBG {
+	0%   {height:0px;}
+
+	100%   {height:196px;}
+}
+
+.actualHelp{
+	opacity:0;
+	animation-fill-mode: forwards;
+	animation-name: actualHelp;
+	animation-duration: 0.7s;
+	animation-iteration-count: 1;
+	animation-delay:1s;
+	
+}
+
+@keyframes actualHelp {
+	0%   {opacity:0;}
+
+	100%   {opacity:1;}
+}
+
+.dispersingHelperDot{
+	animation-fill-mode: forwards;
+	animation-name: dispersingHelperDot;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-delay:0s;
+	
+}
+
+@keyframes dispersingHelperDot {
+	0%   {opacity:1;width:0%;height:0%;}
+
+	100%   {opacity:0;width:100%;left:-50%;top:-400%;height:800%;}
+}
