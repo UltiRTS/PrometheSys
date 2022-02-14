@@ -42,11 +42,11 @@ function refreshBtlFrd() {
 
 
   for (const usr in global.selfState.promethesys.game[currentBtl].players.AIs) {
-    aiPut(currentBtl, usr, global.selfState.promethesys.game[currentBtl].players.AIs[usr]);
+    aiPut(currentBtl, usr, global.selfState.promethesys.game[currentBtl].players.AIs[usr].team);
   }
 
   for (const usr in global.selfState.promethesys.game[currentBtl].players.chickens) {
-    chickenPut(currentBtl, usr, global.selfState.promethesys.game[currentBtl].players.chickens[usr]);
+    chickenPut(currentBtl, usr, global.selfState.promethesys.game[currentBtl].players.chickens[usr].team);
   }
 
   try {
@@ -154,12 +154,12 @@ function chTeams(player, playerType) {
       lobbyServerInterfaceObj.setPpl(nextTeam, player);
       break;
     case 'ai':
-      currentTeam = global.selfState.promethesys.game[currentGame].players.AIs[player];
+      currentTeam = global.selfState.promethesys.game[currentGame].players.AIs[player].team;
       const nextTeam2=nextLetter(currentTeam);
       lobbyServerInterfaceObj.setAI(nextTeam2, player);
       break;
     case 'chicken':
-      currentTeam = global.selfState.promethesys.game[currentGame].players.chickens[player];
+      currentTeam = global.selfState.promethesys.game[currentGame].players.chickens[player].team;
       const nextTeam3=nextLetter(currentTeam);
       lobbyServerInterfaceObj.setChicken(nextTeam3, player);
       break;
@@ -175,12 +175,12 @@ function chTeamsDown(player, playerType) {
       lobbyServerInterfaceObj.setPpl(previousTeam, player);
       break;
     case 'ai':
-      currentTeam = global.selfState.promethesys.game[currentGame].players.AIs[player];
+      currentTeam = global.selfState.promethesys.game[currentGame].players.AIs[player].team;
       const previousTeam3=previousLetter(currentTeam);
       lobbyServerInterfaceObj.setAI(previousTeam3, player);
       break;
     case 'chicken':
-      currentTeam = global.selfState.promethesys.game[currentGame].players.chickens[player];
+      currentTeam = global.selfState.promethesys.game[currentGame].players.chickens[player].team;
       const previousTeam2=previousLetter(currentTeam);
       lobbyServerInterfaceObj.setChicken(previousTeam2, player);
       break;

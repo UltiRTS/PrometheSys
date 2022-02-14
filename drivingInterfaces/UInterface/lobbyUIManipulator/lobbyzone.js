@@ -9,7 +9,7 @@ function lobbyzoneAppendBtl(battleid, map, title, founder) {
   subEntry.style.width='14vw';
   subEntry.id='battleEntry'+battleid;
   subEntry.innerHTML = `
-  <p id="'+battleid+'"onclick="if (selfState.promethesys.sys.currentGame==''){lobbyServerInterfaceObj.joinBattle(&#39;`+title+`&#39;);}else{preBtlExitGem(selfState.promethesys.sys.currentGame);}"class="gameInnerSubEntryTXT" style="font-size:0.7vw; overflow:hidden; font-family: JuneBug2; position: relative; cursor:pointer;background : #2196f3;  margin: 20px ; padding: 25px; mix-blend-mode: screen; font-weight: bold;" type="button" >`+
+  <p id="'+battleid+'"onclick="if (selfState.promethesys.sys.currentGame==null){lobbyServerInterfaceObj.joinBattle(&#39;`+title+`&#39;);}else{preBtlExitGem(selfState.promethesys.sys.currentGame);}"class="gameInnerSubEntryTXT" style="font-size:0.7vw; overflow:hidden; font-family: JuneBug2; position: relative; cursor:pointer;background : #2196f3;  margin: 20px ; padding: 25px; mix-blend-mode: screen; font-weight: bold;" type="button" >`+
   	founder.replace(/Autohost/g, 'missionNo') +
 	`</br>
   	<span id="'+battleid+'Map">someText</span>

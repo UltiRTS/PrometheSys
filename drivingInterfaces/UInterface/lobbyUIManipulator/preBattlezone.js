@@ -34,10 +34,11 @@ function prebtlUnflush() {
   }
 }
 
-function preBtlExitGem(bID) {
-  lobbyServerInterfaceObj.leaveBattle(); // inform lobby server
+function preBtlExitGem() {
+  const currentGame = selfState.promethesys.sys.currentGame;
+  lobbyServerInterfaceObj.leaveBattle(currentGame); // inform lobby server
   // chatLeave(bID)  //inform lobby chat server
-  lobbyServerInterfaceObj.chatLeaveBtl(); // inform autohost
+  // lobbyServerInterfaceObj.chatLeaveBtl(); // inform autohost
 }
 
 function preBtlStartGem() {

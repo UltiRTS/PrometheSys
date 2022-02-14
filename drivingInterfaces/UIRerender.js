@@ -20,8 +20,9 @@ class UIRender {
     lobbyPresence();
     global.selfState.promethesys.UI.currentZone='lobby';
     finalBoxEnlargeLeave();
-    for (const game of state.paramaters.games) {
-      global.selfState.setGameByName(game.battleName, game.port, game.ip, game.isStarted, game.map, game.polls);
+    global.selfState.promethesys.chats.chatsIndex=state.paramaters.chatsIndex; // sets up chat index; only update the index once upon login
+    for (const game of state.paramaters.games) { // sets up all games
+      global.selfState.setGameByName(game.battleName, game.port, game.ip, game.isStarted, game.map, game.polls, game.players, game.id);
       lobbyzoneAppendBtl(game.ip, game.map, game.battleName, game.ip);
     }
   };
@@ -55,24 +56,35 @@ class UIRender {
     console.log('updateRoomList triggered: ');
     console.log(diff);
     console.log(path);
-    if (diff.kind === 'E') {
-      const roomName = diff.rhs;
-      const map = selfState.promethesys.game[roomName].map;
-      lobbyFlush(roomName, map);
-      global.selfState.promethesys.sys.currentGame=roomName;
-      lobbyServerInterfaceObj.joinChat(roomName);
-      initBtlFrd();
-      try {
-        global.selfState.promethesys.chats.chatsIndex[roomName].chatType='battleChat';
-        global.selfState.promethesys.chats.chatsIndex[roomName].chatDescription='battle chat';
-      } catch {
-        global.selfState.promethesys.chats.chatsIndex[roomName] = {};
-        global.selfState.promethesys.chats.chatsIndex[roomName].chatType='battleChat';
-        global.selfState.promethesys.chats.chatsIndex[roomName].chatDescription='battle chat';
+    let roomName;
+    try { // this creates new battle chat for the room
+      if (diff.kind == 'E' && diff.rhs!=null) {
+        roomName = diff.rhs;
+        const map = selfState.promethesys.game[roomName].map;
+        lobbyFlush(roomName, map);
+        global.selfState.promethesys.sys.currentGame=roomName;
+        lobbyServerInterfaceObj.joinChat(roomName);
+        initBtlFrd();
       }
+      global.selfState.promethesys.chats.chatsIndex[roomName].chatType='battleChat';
+      global.selfState.promethesys.chats.chatsIndex[roomName].chatDescription='battle chat';
+      refreshBtlFrd(); // game with their player list consistency maintained by updateGame, here we refresh battle freund when a client is in a game
+    } catch {
+      global.selfState.promethesys.chats.chatsIndex[roomName] = {};
+      global.selfState.promethesys.chats.chatsIndex[roomName].chatType='battleChat';
+      global.selfState.promethesys.chats.chatsIndex[roomName].chatDescription='battle chat';
+      refreshBtlFrd(); // game with their player list consistency maintained by updateGame, here we refresh battle freund when a client is in a game
     }
 
-    refreshBtlFrd(); // game with their player list consistency maintained by updateGame, here we refresh battle freund when a client is in a game
+    try { // this disables prebtl panel and leaves chat
+      if (diff.kind == 'E' && diff.rhs==null) {
+        roomName = diff.rhs;
+        prebtlUnflush();
+        lobbyServerInterfaceObj.leaveChat(global.selfState.promethesys.sys.currentGame);
+        global.selfState.promethesys.sys.currentGame=roomName;
+      }
+    } catch {
+    }
   };
 
   // this updates the game lists in mp menu
@@ -88,6 +100,20 @@ class UIRender {
       }
     } catch (err) {
     }
+    try { // another human joins a hosted game
+      if (diff.kind == 'N' && diff.path[4]=='players') {
+        const id = diff.path[2];
+        const game = global.selfState.getGameByID(id);
+        game.players.players[diff.path[5]]=diff.rhs;
+      }
+    } catch {}
+    try { // another human leaves a hosted game
+      if (diff.kind == 'D' && diff.path[4]=='players') {
+        const id = diff.path[2];
+        const game = global.selfState.getGameByID(id);
+        delete game.players.players[diff.path[5]];
+      }
+    } catch {}
     try { // this catches poll number update
       if (diff.kind == 'N'&& diff.path[3]=='polls') {
         const id = path[2];
@@ -102,7 +128,7 @@ class UIRender {
         console.log(path);
         const id= diff.path[2];
         const game=global.selfState.getGameByID(id);
-        game.players.AIs[diff.path[5]]=diff.rhs.team;
+        game.players.AIs[diff.path[5]]=diff.rhs;
       }
     } catch (err) {
       console.log(err);
@@ -115,7 +141,7 @@ class UIRender {
         console.log(path);
         const id= diff.path[2];
         const game=global.selfState.getGameByID(id);
-        game.players.chickens[diff.path[5]]=diff.rhs.team;
+        game.players.chickens[diff.path[5]]=diff.rhs;
       }
     } catch (err) {
       console.log(err);
@@ -124,14 +150,14 @@ class UIRender {
       if (diff.kind == 'E' && diff.path[6]=='team' && diff.path[4]=='AIs') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
-        game.players.AIs[diff.path[5]]=diff.rhs;
+        game.players.AIs[diff.path[5]].team=diff.rhs;
       }
     } catch {}
     try { // chicken changes teams
       if (diff.kind == 'E' && diff.path[6]=='team' && diff.path[4]=='chickens') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
-        game.players.chickens[diff.path[5]]=diff.rhs;
+        game.players.chickens[diff.path[5]].team=diff.rhs;
       }
     } catch {}
     try { // human changes teams
@@ -141,6 +167,7 @@ class UIRender {
         game.players.players[diff.path[5]].team=diff.rhs;
       }
     } catch {}
+
     refreshBtlFrd();
   };
   // this chat should only be used to update chat members! chat description was set upon login and then lobby will alter the descs!

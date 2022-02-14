@@ -31,7 +31,6 @@ class ServerInterface {
       renderObj.postLogin(state);
       // console.log(state.paramaters.chatsIndex);
       // console.log(global.selfState.promethesys.chats.chatsIndex);
-      global.selfState.promethesys.chats.chatsIndex=state.paramaters.chatsIndex; // only update the index once upon login
     });
 
     this.centralMessagingBus.on('PONG', () => {

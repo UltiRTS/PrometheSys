@@ -20,6 +20,8 @@ class State {
         username: '',
         isLoggedIn: false,
         currentGame: null,
+
+
       },
       game: {}, // set by helper functions!
       UI: {
