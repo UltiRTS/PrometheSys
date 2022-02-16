@@ -19,10 +19,10 @@ class ServerInterface {
     this.centralMessagingBus.on('lobbyServerUpdate', (diffs, states) => {
       // console.log(diffs);
       if (diffs) renderObj.renderDiff(diffs);
-      if (states.paramaters.usrstats.chatMsg!=false) {
+      if (states.paramaters.usrstats.chatMsg!=null) {
         const chatusr=states.paramaters.usrstats.chatMsg.author;
         const chatmsg=states.paramaters.usrstats.chatMsg.msg;
-        const chatchannel=states.paramaters.usrstats.chatMsg.channelName;
+        const chatchannel=states.paramaters.usrstats.chatMsg.chatName;
         renderObj.chatMsgUpdate(chatusr, chatmsg, chatchannel);
       }
     });
