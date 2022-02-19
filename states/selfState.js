@@ -17,11 +17,17 @@ class State {
         channelLastAuthor: {},
       },
       sys: {
+        fs: null,
+        storage: null,
         username: '',
         isLoggedIn: false,
         currentGame: null,
-
-
+        enginepath: './engine/spring',
+        isLinux: true,
+        runningEngineCount: 0,
+        send2Main: null,
+        appPath: '',
+        storage: storage,
       },
       game: {}, // set by helper functions!
       UI: {
@@ -1959,7 +1965,6 @@ class State {
         'type': 'int',
       },
     };
-    this.freunds=[];
     this.activeGems={};
   }
   addGem(Name) {
@@ -1989,7 +1994,7 @@ class State {
       return 0;
     }
   }
-  setGameByName(gameName, mgrPort, mgrIP, gameStatus, map, polls, players, id) {
+  setGameByName(gameName, mgrPort, mgrIP, gameStatus, map, polls, players, id, engineToekn) {
     this.promethesys.game[gameName]={
       'gameName': gameName,
       'id': id,
@@ -1999,6 +2004,7 @@ class State {
       'polls': polls,
       'map': map,
       'players': players,
+      'engineToekn': engineToekn,
     };
   }
 

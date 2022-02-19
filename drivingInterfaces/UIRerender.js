@@ -95,7 +95,7 @@ class UIRender {
 
     try { // this adds a game to the game list
       if (diff.item.kind == 'N') {
-        global.selfState.setGameByName(diff.item.rhs.battleName, diff.item.rhs.port, diff.item.rhs.ip, diff.item.rhs.isStarted, diff.item.rhs.map, diff.item.rhs.polls, diff.item.rhs.players, diff.item.rhs.id);
+        global.selfState.setGameByName(diff.item.rhs.battleName, diff.item.rhs.port, diff.item.rhs.ip, diff.item.rhs.isStarted, diff.item.rhs.map, diff.item.rhs.polls, diff.item.rhs.players, diff.item.rhs.id, diff.item.rhs.engineToekn);
         lobbyzoneAppendBtl(diff.item.rhs.ip, diff.item.rhs.map, diff.item.rhs.battleName, diff.item.rhs.ip);
       }
     } catch (err) {
@@ -167,6 +167,23 @@ class UIRender {
         game.players.players[diff.path[5]].team=diff.rhs;
       }
     } catch {}
+
+    try { // game is started
+      if (diff.kind == 'E' && diff.path[3]=='isStarted') {
+        try {
+          const id = diff.path[2];
+          const game = global.selfState.getGameByID(id);
+          game.isStarted=diff.rhs;
+          if (game.gameName==global.selfState.promethesys.sys.currentGame) {
+            usyncWriteScript(game);
+          // lobbyFlush(window.nowinBattle, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, document.getElementById('title'+window.nowinBattle).innerHTML, 0, 0);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    } catch {
+    }
 
     refreshBtlFrd();
   };

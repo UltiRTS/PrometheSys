@@ -42,7 +42,8 @@ function preBtlExitGem() {
 }
 
 function preBtlStartGem() {
-  lobbyServerInterfaceObj.startGame();
+  const currentGame = selfState.promethesys.sys.currentGame;
+  lobbyServerInterfaceObj.startGame(currentGame);
 }
 
 function preBattleListMap(pool) {

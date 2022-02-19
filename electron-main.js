@@ -2,6 +2,8 @@ const {EventEmitter} = require('events');
 const centralMessagingBus = new EventEmitter();
 const path = require('path');
 const messenger = require('messenger');
+const os = require('os');
+
 const {UIRender} = require('./drivingInterfaces/UIRerender');
 renderDiffObj=new UIRender();
 // the below inits network monitoring and sending capabilities
@@ -34,3 +36,14 @@ const fs = require('fs');
 const state = new State(storage);
 global.selfState = state;
 
+selfState.promethesys.sys.isLinux = os.type()=='Linux';
+
+selfState.promethesys.sys.fs = fs;
+selfState.promethesys.sys.storage = storage;
+
+const ipcRenderer = require('electron').ipcRenderer;
+selfState.promethesys.sys.send2Main=ipcRenderer.send;
+
+if (process.env.WDIR=='undefined') {
+  selfState.promethesys.sys.appPath = '.';
+}

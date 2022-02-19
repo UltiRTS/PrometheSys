@@ -1,0 +1,165 @@
+[DataDirLocater::FindWriteableDataDir] using writeable data-directory "./ultiConfig/"
+Warning: default config-file "./ultiConfig/springsettings.cfg" not both readable and writeable
+Using writeable configuration source: "./ultiConfig/springsettings.cfg"
+Using additional read-only configuration source: "/home/lucifer/.config/spring/springsettings.cfg"
+Error: FileConfigSource: Error: Could not write to config file "./ultiConfig/springsettings.cfg"
+LogOutput initialized. Logging to /media/lucifer/334d9ee4-73d7-4ef9-89fc-a6c6294adcdd/PrometheSys/ultiConfig/infolog.txt
+============== <Log Sections> ==============
+  Available:
+    ArchiveScanner
+    AutohostInterface
+    BumpWater
+    CSMFGroundTextures
+    CrashHandler
+    CregSerializer
+    DecalsDrawerGL4
+    DynWater
+    FarTextureHandler
+    Font
+    GameServer
+    GroundMoveType
+    KeyBindings
+    LuaSocket
+    Model
+    Net
+    Path
+    Piece
+    RoamMeshDrawer
+    Shader
+    SkyBox
+    Sound
+    Texture
+    VFS
+  Enabled:
+    Sound (Notice)
+    VFS (Info)
+  
+  Enable or disable log sections using the LogSections configuration key
+  or the SPRING_LOG_SECTIONS environment variable (both comma separated).
+  Use "none" to disable the default log sections.
+============== </Log Sections> ==============
+
+============== <User Config> ==============
+============== </User Config> ==============
+
+============== <User System> ==============
+  Spring Engine Version: 104.0.1-1544-ge1f249f maintenance
+      Build Environment: gcc libstdc++ version 20160609
+       Compiler Version: gcc-5.4.0 20160609
+       Operating System: Linux 5.11.0-43-generic #47~20.04.2-Ubuntu SMP Mon Dec 13 11:06:56 UTC 2021 (x86_64)
+        Hardware Config: Intel(R) Xeon(R) E-2286M  CPU @ 2.40GHz; 31859MB RAM
+       Binary Word Size: 64-bit (native)
+          Process Clock: std::chrono::high_resolution_clock
+     Physical CPU Cores: 8
+      Logical CPU Cores: 16
+============== </User System> ==============
+
+[good_fpu_init][STREFLOP_SSE]
+	SSE 1.0 : 1,  SSE 2.0 : 1
+	SSE 3.0 : 1, SSSE 3.0 : 1
+	SSE 4.1 : 1,  SSE 4.2 : 1
+	SSE 4.0A: 0,  SSE 5.0A: 0
+[WatchDog::Install] installed (hang-timeout: 10s)
+[WatchDog::RegisterThread] registering controls for thread [main]
+[GL::CheckAvailableVideoModes] desktop={1920x1080x24bpp@120Hz} current={1920x1080x24bpp@120Hz}
+	display=1 modes=65 bounds={x=0, y=0, w=1920, h=1080}
+		[ 1] 1920x1080x24bpp@120Hz
+		[ 4] 1680x1050x24bpp@60Hz
+		[ 5] 1600x1024x24bpp@60Hz
+		[ 6] 1600x900x24bpp@120Hz
+		[ 8] 1440x900x24bpp@60Hz
+		[ 9] 1440x810x24bpp@120Hz
+		[16] 1280x800x24bpp@120Hz
+		[18] 1280x720x24bpp@120Hz
+		[23] 1024x576x24bpp@120Hz
+		[26] 960x600x24bpp@120Hz
+		[27] 960x540x24bpp@120Hz
+		[31] 864x486x24bpp@60Hz
+		[32] 840x525x24bpp@120Hz
+		[36] 800x512x24bpp@120Hz
+		[37] 800x450x24bpp@120Hz
+		[38] 720x450x24bpp@120Hz
+		[39] 720x405x24bpp@60Hz
+		[48] 640x400x24bpp@120Hz
+		[49] 640x360x24bpp@120Hz
+		[54] 512x288x24bpp@120Hz
+		[55] 480x270x24bpp@120Hz
+		[57] 432x243x24bpp@120Hz
+		[64] 320x180x24bpp@120Hz
+[GR::CreateSDLWindow] using 0x anti-aliasing and 24-bit depth-buffer (PF="SDL_PIXELFORMAT_RGB888") for main window
+[GR::CreateSDLWindow] using 0x anti-aliasing and 24-bit depth-buffer (PF="SDL_PIXELFORMAT_RGB888") for hidden window
+[GR::LogVersionInfo]
+	SDL version : 2.0.10 (linked) / 2.0.4 (compiled)
+	GL version  : 4.6.0 NVIDIA 495.44
+	GL vendor   : NVIDIA Corporation
+	GL renderer : Quadro T2000/PCIe/SSE2
+	GLSL version: 4.60 NVIDIA
+	GLEW version: 2.1.0
+	GPU memory  : 4096MB (total) / 2970MB (available)
+	SDL swap-int: 1
+	
+	ARB shader support        : 1
+	GLSL shader support       : 1
+	FBO extension support     : 1
+	NVX GPU mem-info support  : 1
+	ATI GPU mem-info support  : 0
+	NPOT-texture support      : 1 (1)
+	S3TC/DXT1 texture support : 1/1
+	texture query-LOD support : 1 (1)
+	MSAA frame-buffer support : 1 (1)
+	24-bit Z-buffer support   : 1 (-)
+	primitive-restart support : 1 (1)
+	clip-space control support: 1 (1)
+	seamless cube-map support : 1 (1)
+	frag-depth layout support : 1 (-)
+	
+	max. FBO samples             : 64
+	max. texture size            : 32768
+	max. texture anisotropy level: 16.000000
+	max. vec4 varyings/attributes: 31/16
+	max. draw-buffers            : 8
+	max. rec. indices/vertices   : 1048576/1048576
+	max. uniform buffer-bindings : 84
+	max. uniform block-size      : 64KB
+	
+	enable ATI-hacks : 0
+	compress MIP-maps: 0
+[GR::ToggleGLDebugOutput] OpenGL debug-context not installed (dbgErrors=0 dbgTraces=0)
+[GR::UpdateGLConfigs]
+[VSync::SetInterval] interval=0 (disabled)
+[GR::UpdateGLGeometry][1] winSize=<1,1>
+[GR::UpdateGLGeometry][2] winSize=<1920,1080>
+[GR::InitGLState]
+[GR::LogDisplayMode] display-mode set to 1920x1080x24bpp@120Hz (fullscreen::decorated)
+[TexMemPool::Resize] poolSize=268435456u allocSize=0u texCount=0u
+[WatchDog::RegisterThread] registering controls for thread [vfsi]
+[DataDirLocater::FindWriteableDataDir] using writeable data-directory "./ultiConfig/"
+Error: [ExitSpringProcess] errorMsg="a datadir may not be specified with a relative path: "./ultiConfig/"" msgCaption="Spring: caught std::exception" mainThread=0
+[WatchDog::DeregisterThread] deregistering controls for thread [vfsi]
+[WatchDog::DeregisterThread] deregistering controls for thread [main]
+[ThreadPool::SetThreadCount][1] wanted=4 current=1 maximum=8 (init=1)
+[ThreadPool::SetThreadCount][2] workers=3
+[Threading] Main thread CPU affinity mask set: 8184 (config is 65528)
+Error: [Watchdog::DeregisterThread] invalid thread number 0
+Error: [ExitSpringProcess] errorMsg="[thread::error::run] a datadir may not be specified with a relative path: "./ultiConfig/"" msgCaption="Spring: caught std::exception" mainThread=1
+Error: [Watchdog::ClearTimer(id)] Invalid thread 4 (_threadId=(nil))
+[SpringApp::Kill][1] fromRun=0
+[ThreadPool::SetThreadCount][1] wanted=0 current=4 maximum=8 (init=0)
+	[async=0] threads=4 tasks=0 {sum,avg}{exec,wait}time={{0.000, 0.000}, {0.000, 0.000}}ms
+	[async=1] threads=4 tasks=3 {sum,avg}{exec,wait}time={{0.068, 0.023}, {0.076, 0.025}}ms
+		thread=1 tasks=1 {sum,min,max,avg}{exec,wait}time={{0.046, 0.046, 0.046, 0.046}, {0.007, 0.007, 0.007, 0.007}}ms
+		thread=2 tasks=1 {sum,min,max,avg}{exec,wait}time={{0.011, 0.011, 0.011, 0.011}, {0.020, 0.020, 0.020, 0.020}}ms
+		thread=3 tasks=1 {sum,min,max,avg}{exec,wait}time={{0.011, 0.011, 0.011, 0.011}, {0.050, 0.050, 0.050, 0.050}}ms
+[ThreadPool::SetThreadCount][2] workers=0
+[SpringApp::Kill][2]
+[SpringApp::Kill][3]
+[SpringApp::Kill][4] font=0x462bdac0
+[SpringApp::Kill][5]
+[SpringApp::Kill][6]
+[SpringApp::Kill][7]
+[SpringApp::Kill][8]
+Error: [Watchdog::DeregisterThread] invalid thread number 0
+[WatchDog::Uninstall][1] hangDetectorThread=0x2013950 (joinable=1)
+[WatchDog::Uninstall][2]
+[WatchDog::Uninstall][3]
+[SpringApp::Kill][9]
