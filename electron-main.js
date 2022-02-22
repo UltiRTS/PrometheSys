@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const {EventEmitter} = require('events');
 const centralMessagingBus = new EventEmitter();
 const path = require('path');
@@ -44,6 +45,27 @@ selfState.promethesys.sys.storage = storage;
 const ipcRenderer = require('electron').ipcRenderer;
 selfState.promethesys.sys.send2Main=ipcRenderer.send;
 
-if (process.env.WDIR=='undefined') {
-  selfState.promethesys.sys.appPath = '.';
+if (selfState.promethesys.sys.appPath==null) {
+  selfState.promethesys.sys.appPath=selfState.promethesys.sys.storage.get('wDIR');
+}
+
+if (selfState.promethesys.sys.storage.has('userVolume')) {
+  selfState.promethesys.audio.userVolume=selfState.promethesys.sys.storage.get('userVolume');
+} else {
+  selfState.promethesys.audio.userVolume=50;
+}
+if (selfState.promethesys.sys.storage.has('userFXVolume')) {
+  selfState.promethesys.audio.userFXVolume=selfState.promethesys.sys.storage.get('userFXVolume');
+} else {
+  selfState.promethesys.audio.userFXVolume=16;
+}
+
+if (selfState.promethesys.sys.storage.has('userNotifVolume')) {
+  selfState.promethesys.audio.userNotifVolume=selfState.promethesys.sys.storage.get('userNotifVolume');
+} else {
+  selfState.promethesys.audio.userNotifVolume=16;
+}
+
+if (!selfState.promethesys.sys.storage.has('mapCache')||selfState.promethesys.sys.storage.get('mapCache')==undefined) {
+  selfState.promethesys.sys.storage.set('mapCache', {'1': '2'});
 }

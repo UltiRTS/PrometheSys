@@ -9,7 +9,7 @@
     "build": "electron-builder -wl --x64 --publish never"
   },
   "devDependencies": {
-    "electron": "^12.2.3",
+    "electron": "^17.0.1",
     "electron-builder": "22.9.1",
     "eslint": "^8.6.0",
     "eslint-config-google": "^0.14.0",

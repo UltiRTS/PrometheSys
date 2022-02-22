@@ -1,18 +1,21 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 const {app, BrowserWindow} = require('electron');
+const path = require('path');
+
 const ipcMain = require('electron').ipcMain;
 
 let mainWindow;
+console.log(path.dirname(app.getPath('exe')));
+console.log(path.dirname(process.execPath));
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true,
       contextIsolation: false,
 
-    }, show: false,
+    }, show: true,
   });
 
 

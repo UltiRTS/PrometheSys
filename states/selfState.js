@@ -22,17 +22,18 @@ class State {
         username: '',
         isLoggedIn: false,
         currentGame: null,
-        enginepath: './engine/spring',
         isLinux: true,
         runningEngineCount: 0,
         send2Main: null,
-        appPath: '',
+        appPath: null,
         storage: storage,
       },
       game: {}, // set by helper functions!
       UI: {
         currentZone: 'unloggedIn',
         loadings: [],
+        activeGems: {},
+        allMinimapCache: storage.get('mapCache'),
       },
       audio: {
         isMusicPlaying: false,
@@ -43,52 +44,9 @@ class State {
         sourceIntro: null,
         sourceLoop: null,
         audioDelay: null,
-
+        userFXVolume: null,
       },
     };
-    this.runningEngineCount=0;
-    this.minimapCache={};
-    this.allMinimapCache=storage.get('mapCache');
-    this.specppl=[];
-    this.ai={};
-    this.mapDic={};
-    this.activeGems={};
-    // but why?
-    // this.storage=new Store();
-    this.storage = storage;
-    this.gameStatus='';
-    this.nowHostedby='';
-    this.ai={};
-    this.ppl={};
-    this.isExited=true;
-    this.specppl=[];
-    if (this.storage.has('userVolume')) {
-	        this.promethesys.audio.userVolume=this.storage.get('userVolume');
-    } else {
-      this.promethesys.audio.userVolume=50;
-	    }
-	    if (this.storage.has('userFXVolume')) {
-      this.promethesys.audio.userFXVolume=this.storage.get('userFXVolume');
-    } else {
-	        this.userFXVolume=16;
-	    }
-
-    if (this.storage.has('userNotifVolume')) {
-      this.promethesys.audio.userNotifVolume=storage.get('userNotifVolume');
-    } else {
-      this.promethesys.audio.userNotifVolume=16;
-	    }
-
-	    if (!this.storage.has('mapCache')||storage.get('mapCache')==undefined) {
-		    this.storage.set('mapCache', {'1': '2'});
-    }
-
-	    if (typeof(process.env.WDIR)=='undefined') {
-		    process.env.WDIR=storage.get('wDIR');
-	    } else {
-		    this.storage.set('wDIR', process.env.WDIR);
-	    }
-
 
     this.springSettings={
       '3DTrees': {
@@ -1969,27 +1927,27 @@ class State {
   }
   addGem(Name) {
     try {
-      this.activeGems[Name]+=1;
+      this.promethesys.UI.activeGems[Name]+=1;
     } catch {
-      this.activeGems[Name]=1;
+      this.promethesys.UI.activeGems[Name]=1;
     }
   }
   removeGem(Name) {
     try {
-      this.activeGems[Name]-=1;
+      this.promethesys.UI.activeGems[Name]-=1;
     } catch {
-      this.activeGems[Name]=0;
+      this.promethesys.UI.activeGems[Name]=0;
     }
-    if (this.activeGems[Name]<=0) {
-      this.activeGems[Name]=0;
+    if (this.promethesys.UI.activeGems[Name]<=0) {
+      this.promethesys.UI.activeGems[Name]=0;
     }
   }
   removeAllGems(Name) {
-    this.activeGems[Name]=0;
+    this.promethesys.UI.activeGems[Name]=0;
   }
   getGem(name) {
     try {
-      return this.activeGems[name];
+      return this.promethesys.UI.activeGems[name];
     } catch {
       return 0;
     }

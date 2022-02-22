@@ -1,3 +1,6 @@
+/* eslint-disable require-jsdoc */
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 // selfState.isFXPlaying=false
 selfState.isFXPlaying=false;
 

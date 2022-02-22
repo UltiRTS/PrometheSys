@@ -78,6 +78,7 @@ function logMeIn() {
 
       setTimeout(function() {
         document.getElementById('welcomeSubline2').style.display='';
+        lobbyLauncherInterfaceObj.ipcCheck();
         setTimeout(function() {
           document.getElementById('welcomeSubline3').style.display='';
         }, 2800);
