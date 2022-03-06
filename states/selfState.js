@@ -18,7 +18,6 @@ class State {
       },
       sys: {
         fs: null,
-        storage: null,
         username: '',
         isLoggedIn: false,
         currentGame: null,
@@ -27,6 +26,8 @@ class State {
         send2Main: null,
         appPath: null,
         storage: storage,
+        mapDic: null,
+        isLauncherPresent: false,
       },
       game: {}, // set by helper functions!
       UI: {
@@ -1952,13 +1953,13 @@ class State {
       return 0;
     }
   }
-  setGameByName(gameName, mgrPort, mgrIP, gameStatus, map, polls, players, id, engineToekn) {
+  setGameByName(gameName, mgrPort, mgrIP, isStarted, map, polls, players, id, engineToekn) {
     this.promethesys.game[gameName]={
       'gameName': gameName,
       'id': id,
       'mgrPort': mgrPort,
       'mgrIP': mgrIP,
-      'gameStatus': gameStatus,
+      'isStarted': isStarted,
       'polls': polls,
       'map': map,
       'players': players,

@@ -169,14 +169,32 @@ class UIRender {
     } catch {}
 
     try { // game is started
-      if (diff.kind == 'E' && diff.path[3]=='isStarted') {
+      if (diff.kind == 'E' && diff.path[3]=='isStarted' && diff.rhs==true) {
         try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.isStarted=diff.rhs;
           if (game.gameName==global.selfState.promethesys.sys.currentGame) {
             usyncWriteScript(game);
-          // lobbyFlush(window.nowinBattle, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, document.getElementById('title'+window.nowinBattle).innerHTML, 0, 0);
+            const map = selfState.promethesys.game[game.gameName].map;
+            lobbyFlush(game.gameName, map);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    } catch {
+    }
+
+    try { // game is exited
+      if (diff.kind == 'E' && diff.path[3]=='isStarted' && diff.rhs==false) {
+        try {
+          const id = diff.path[2];
+          const game = global.selfState.getGameByID(id);
+          game.isStarted=diff.rhs;
+          if (game.gameName==global.selfState.promethesys.sys.currentGame) {
+            const map = selfState.promethesys.game[game.gameName].map;
+            lobbyFlush(game.gameName, map);
           }
         } catch (err) {
           console.log(err);
@@ -186,6 +204,7 @@ class UIRender {
     }
 
     refreshBtlFrd();
+    lobbyLauncherInterfaceObj.lobbyLauncherDownloadAllMap();
   };
   // this chat should only be used to update chat members! chat description was set upon login and then lobby will alter the descs!
   updateChatsIndex = (diff, path) => {

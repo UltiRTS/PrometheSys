@@ -19,6 +19,7 @@
     "deep-diff": "^1.0.2",
     "discord-rpc": "^3.1.4",
     "electron-store": "^8.0.1",
+    "fastest-levenshtein": "^1.0.12",
     "messenger": "0.0.9",
     "ws": "^8.4.0"
   },

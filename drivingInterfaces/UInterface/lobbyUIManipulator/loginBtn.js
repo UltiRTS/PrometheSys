@@ -78,14 +78,15 @@ function logMeIn() {
 
       setTimeout(function() {
         document.getElementById('welcomeSubline2').style.display='';
-        lobbyLauncherInterfaceObj.ipcCheck();
-        setTimeout(function() {
+        const launcher=lobbyLauncherInterfaceObj.ipcCheck();
+        setTimeout(()=> {
           document.getElementById('welcomeSubline3').style.display='';
+          if (selfState.promethesys.sys.isLauncherPresent) lobbyLauncherInterfaceObj.ipcGetPath();
         }, 2800);
         setTimeout(function() {
           document.getElementById('welcomeSubline4').style.display='';
+          if (selfState.promethesys.sys.isLauncherPresent) lobbyLauncherInterfaceObj.ipcGetIndex();
         }, 3600);
-        preBtlInitMapPile();
         setTimeout(function() {
           document.getElementById('welcomeSubline5').style.display='';
         }, 4000);

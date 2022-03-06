@@ -574,7 +574,7 @@
 				</div>
 
 				<div id="chatAdd" class="Add" onmouseover='pushToolTip("[Press] this button to [join] a new [chat]")'
-					onclick="inputGrabber('Join a Chat','THEA, INC.','global','chatJoin')";
+					onclick="inputGrabber('Join a Chat','THEA, INC.','global','chatJoin')" ;
 					style="cursor: default;position: absolute;top: 1%;right: 13%;font-family: JuneBug2;font-size:30px;border:0;margin:0;filter: drop-shadow(10px 10px 2px rgba(255, 255, 255,0.4));">
 					█
 				</div>
@@ -1174,6 +1174,91 @@
 	</div>
 
 	<div id="visualOverlay">
+
+		<div id="controlPanel"
+			style="position:absolute;height:100%;width:100%;background: #00000040;backdrop-filter: blur(17px);">
+			<div id="mapSelector"
+				style="position:absolute;height: 74%;width: 82%;top: 16%;background: #50340069;left: 8%;/* mix-blend-mode: screen; *//* font-size:5vw; */color:white;backdrop-filter: blur(6vw);">
+
+				<div id="mapCountour"
+					style="position: absolute; height: 98%; width: 80%; background: radial-gradient(dodgerblue 3%, #03132100 66%) var(--posX) var(--posY) / 900px 900px no-repeat fixed; --posX:190px; --posY:-151px; top: 2.1%;">
+					<div
+						style="position:relative;height: 61px;width: 49px;border-color: coral;border-width: 5px;background:red;border-style: solid;display: inline-block;margin: 7px;">
+					</div>
+
+					<div
+						style="position:relative;height: 61px;width: 49px;border-color: coral;border-width: 5px;background:red;border-style: solid;display: inline-block;margin: 7px;">
+					</div>
+
+					<div
+						style="position:relative;height: 61px;width: 49px;border-color: coral;border-width: 5px;background:red;border-style: solid;display: inline-block;margin: 7px;">
+					</div>
+
+
+
+					<script>
+						{
+							const hiddens = document.getElementById('mapCountour');
+							const controlPanel = document.getElementById('controlPanel');
+							controlPanel.addEventListener("mousemove", e => {
+								hiddens.style.setProperty("--posX", `${e.clientX - 450}px`);
+								hiddens.style.setProperty("--posY", `${e.clientY - 450}px`);
+							});
+						}
+
+					</script>
+				</div>
+				<div id="topBar" style="position:absolute;top:0%;width:100%;height:2%;background:#2196f3"></div>
+
+				<div id="rightBar"
+					style="position:absolute;top: 0%;width: 21%;height: 100%;background:#2196f3;right:0%;overflow:hidden;">
+					<img style="position:absolute;height: 33%;left: -19%;top: 74%;opacity: 16%;" src="assets/thea.png">
+				</div>
+				<div onclick="inputGrabber('Manual Override', 'Type a map name', 'Comet Catcher Redux', 'mapPickerManualPick')" id="centerBar"
+					style="position:absolute;top: 2%;width: 12%;height: 73%;background: #444444;right: 13%;filter: drop-shadow(11px 12px 9px #2c2e31);">
+					<div id="centerBarBg"
+						style="position:absolute;height: 100%;left: 0%;top: 0%;width:100%;overflow:hidden;opacity: 2%;">
+						<img style="position:absolute;height: 123%;left: -63%;top: 0;" src="assets/theaAvatar.png">
+					</div>
+					<div
+						style="position:absolute;top: 4%;left: 0%;background:grey;color:black;padding: 2%;mix-blend-mode:screen;font-family:JuneBug4;">
+						Satellite Image</div>
+
+					<div id="MapBar"
+						style="position:absolute;top: 33%;width: 186%;height: 3%;background: #c3c3c3;right: -97%;filter: drop-shadow(11px 12px 27px #2c2e31);">
+
+						<img style="position:absolute;height: 735%;left: -4%;top: -492%;"
+							src="assets/minimapSample.png">
+						<div
+							style="position:absolute;top: -173%;/* left: 71%; *//* background:grey; */color: white;padding: 2%;mix-blend-mode:screen;font-family:JuneBug5;width:100%;text-align:right;font-size: 0.6vw;">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"
+								style="position:absolute;left: 48%;"></i>DATABASE PRIMARY INDEX</div>
+						<div
+							style="position:absolute;top: -46%;right: 2%;/* background:grey; */color:black;padding: 2%;/* mix-blend-mode:screen; */font-family:JuneBug;width:100%;text-align:right;">
+							Ded Land</div>
+						<div
+							style="position:absolute;top: 203%;/* left: 71%; *//* background:grey; */color: white;padding: 2%;mix-blend-mode:screen;font-family:JuneBug5;width:100%;text-align:right;font-size: 0.6vw;">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"
+								style="position:absolute;left: 48%;"></i>RELATED QUERRY</div>
+						<div
+							style="position:absolute;top: 835.9%;left: -18.6%;/* background:grey; */color: white;padding: 2%;mix-blend-mode:screen;font-family: 'JuneBug4';width:100%;text-align:right;font-size: 1.5vh;">
+							PAGE</div>
+						<div
+							style="position:absolute;top: 256%;left: -18%;/* background:grey; */color: white;padding: 2%;mix-blend-mode:screen;font-family:JuneBug5;width:100%;text-align:right;font-size: 7.7vh;font-weight:900;">
+							52</div>
+						<div
+							style="position:absolute;top: 591%;left: 2.6%;/* background:grey; */color: #ffffff52;padding: 2%;mix-blend-mode:screen;font-family:JuneBug5;width:100%;text-align:right;font-size: 2.5vw;">
+							53</div>
+						<div
+							style="position:absolute;top: 315.5%;left: 2.6%;/* background:grey; */color: #ffffff59;padding: 2%;mix-blend-mode:screen;font-family:JuneBug5;width:100%;text-align:right;font-size: 2.5vw;">
+							51</div><i class="fa fa-code-fork" aria-hidden="true"
+							style="position:absolute;top: 139%;left: 48%;/* background:grey; */color: #ffffff14;padding: 2%;/* mix-blend-mode:screen; *//* font-family:JuneBug5; *//* width:100%; */text-align:right;font-size: 17.7vh;/* font-weight:400; */"></i>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="loading" id="loading"
 			style="position:fixed; height:120%;width:120%;top:-10%;left:-10%;background:rgba(155,155,155,0.1);z-index:100; display:none;backdrop-filter: blur(10px);">
 			<div id="loadingBG" style="background:rgba(0,0,0,0.8);position:fixed; overflow:visible;top:40%;"></div>
@@ -1307,18 +1392,27 @@
 	<script src="lib/unitsync.js"></script>
 	<script src="electron-main.js"></script>
 
-	<script src="drivingInterfaces/UInterface/unclassified/ultils.js"></script> <!--fixed-->
-	<script src="drivingInterfaces/UInterface/unclassified/gem.js"></script> <!--fixed-->
-	<script src="drivingInterfaces/UInterface/unclassified/loading.js"></script> <!--fixed-->
-	<script src="drivingInterfaces/UInterface/unclassified/smolNotif.js"></script> <!--fixed-->
-	<script src="drivingInterfaces/UInterface/unclassified/soundPlayer.js"></script> <!--fixed-->
-	<script src="drivingInterfaces/UInterface/unclassified/toolTip.js"></script> <!--fixed-->
-	<script src="drivingInterfaces/UInterface/unclassified/bgNN.js"></script> <!--fixed-->
-	
-	
+	<script src="drivingInterfaces/UInterface/unclassified/ultils.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/gem.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/loading.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/smolNotif.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/soundPlayer.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/toolTip.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/bgNN.js"></script>
+	<!--fixed-->
+	<script src="drivingInterfaces/UInterface/unclassified/controlPanel.js"></script>
+	<!--fixed-->
+
 	<script src="drivingInterfaces/UInterface/lobbyUIManipulator/preBattlezone.js"></script>
 
-	<script src="drivingInterfaces/UInterface/lobbyUIManipulator/loginBtn.js"></script> <!--fixed-->
+	<script src="drivingInterfaces/UInterface/lobbyUIManipulator/loginBtn.js"></script>
+	<!--fixed-->
 	<script src="drivingInterfaces/UInterface/settingUIManipulator/settings.js"></script>
 	<script src="drivingInterfaces/UInterface/unclassified/notif.js"></script>
 	<script src="drivingInterfaces/UInterface/unclassified/noticeGrabber.js"></script>
@@ -1333,7 +1427,7 @@
 	<script src="drivingInterfaces/UInterface/unclassified/personalStats.js"></script>
 	<script src="drivingInterfaces/UInterface/campaignUIManipulator/campaignFog.js"></script>
 	<script src="drivingInterfaces/UInterface/campaignUIManipulator/campaignEvent.js"></script>
-	
+
 
 </body>
 

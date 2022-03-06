@@ -9,9 +9,9 @@ function lobbyFlush(title, map) {
   document.getElementById('prebattle').style.display='';
   document.getElementById('pregameTitle').innerHTML=title;
   document.getElementById('pregameMap').innerHTML=map;
-
-  // console.log(selfState.gameStatus)
-  if (selfState.promethesys.game[title].gameStatus) {
+  console.log('isSTARTED');
+  console.log(selfState.promethesys.game[title].isStarted);
+  if (selfState.promethesys.game[title].isStarted) {
     document.getElementById('gameProgress').style.display='';
   } else {
     document.getElementById('gameProgress').style.display='none';
@@ -19,10 +19,6 @@ function lobbyFlush(title, map) {
 }
 
 function prebtlUnflush() {
-  selfState.ai={};
-  selfState.ppl={};
-  selfState.isExited=true;
-  selfState.specppl=[];
   document.getElementById('gameProgress').style.display='none';
   document.getElementById('panel').style.display='';
   document.getElementById('prebattle').style.display='none';
@@ -118,20 +114,6 @@ function preBtlToggMoreMap() {
   selfState.minimapCache={};
 }
 
-function preBtlInitMapPile() {
-  let mapPileContent='';
-
-  for (map in selfState.allMinimapCache) {
-    try {
-      _img=selfState.allMinimapCache[map];
-      mapPileContent+='<div  onclick="chatVoteMap(\''+map+'\')" onmouseover="preBtlMoreMapBlowUp(\''+map+'\');pushToolTip(\'[Mouse over] to [preview map]; [click] to [select map] if you are a host\')" onmouseleave="preBtlMoreMapBlowUp()" style="display:inline-block; position:relative;width:2vw;height:2vw;margin:0.2vw;"><img style="position:absolute;width:100%;height:100%;" src="data:image/png;base64,' + _img + '" /></div>';
-    } catch {
-
-    }
-  }
-
-  document.getElementById('mapPile').innerHTML=mapPileContent;
-}
 
 function preBtlMoreMapBlowUp(map=selfState.mapDic[selfState.nowinBattle]) {
   try {

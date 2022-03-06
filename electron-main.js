@@ -3,6 +3,8 @@ const {EventEmitter} = require('events');
 const centralMessagingBus = new EventEmitter();
 const path = require('path');
 const messenger = require('messenger');
+const {distance, closest} = require('fastest-levenshtein');
+closestFinder = closest;
 const os = require('os');
 
 const {UIRender} = require('./drivingInterfaces/UIRerender');
@@ -47,6 +49,10 @@ selfState.promethesys.sys.send2Main=ipcRenderer.send;
 
 if (selfState.promethesys.sys.appPath==null) {
   selfState.promethesys.sys.appPath=selfState.promethesys.sys.storage.get('wDIR');
+}
+
+if (selfState.promethesys.sys.mapDic==null) {
+  selfState.promethesys.sys.mapDic=selfState.promethesys.sys.storage.get('mapDic');
 }
 
 if (selfState.promethesys.sys.storage.has('userVolume')) {

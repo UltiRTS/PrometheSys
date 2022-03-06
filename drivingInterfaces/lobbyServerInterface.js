@@ -332,6 +332,16 @@ class ServerInterface {
     }
   }
 
+  setMap(battleName, mapID) {
+    const setMapJson = {
+      action: 'SETMAP',
+      parameters: {
+        battleToSetMap: battleName,
+        mapId: mapID,
+      },
+    };
+    this.lobbyServerNetwork.send2lobbyServer(setMapJson);
+  }
 
   /**
    *
