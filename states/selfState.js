@@ -1982,6 +1982,15 @@ class State {
     }
     return null;
   }
+
+  mapID2Name(id) {
+    for (const map in this.promethesys.sys.mapDic) {
+      if (this.promethesys.sys.mapDic[map].id==id) {
+        return map;
+      }
+    }
+    return 'Unknown Map';
+  }
 }
 
 module.exports= {

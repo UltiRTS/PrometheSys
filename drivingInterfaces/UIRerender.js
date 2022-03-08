@@ -53,15 +53,16 @@ class UIRender {
 
   // this will update prebtl panel once joined a battle
   updateRoom = (diff, path) => {
-    console.log('updateRoomList triggered: ');
-    console.log(diff);
-    console.log(path);
+    // console.log('updateRoomList triggered: ');
+    // console.log(diff);
+    // console.log(path);
     let roomName;
     try { // this creates new battle chat for the room
       if (diff.kind == 'E' && diff.rhs!=null) {
         roomName = diff.rhs;
-        const map = selfState.promethesys.game[roomName].map;
-        lobbyFlush(roomName, map);
+        const mapID = selfState.promethesys.game[roomName].map;
+        const mapName = selfState.mapID2Name(mapID);
+        lobbyFlush(roomName, mapName);
         global.selfState.promethesys.sys.currentGame=roomName;
         lobbyServerInterfaceObj.joinChat(roomName);
         initBtlFrd();
@@ -123,9 +124,9 @@ class UIRender {
     }
     try { // added ais
       if (diff.kind == 'N' && diff.path[4]=='AIs') {
-        console.log('update AI fired');
-        console.log(diff);
-        console.log(path);
+        // console.log('update AI fired');
+        // console.log(diff);
+        // console.log(path);
         const id= diff.path[2];
         const game=global.selfState.getGameByID(id);
         game.players.AIs[diff.path[5]]=diff.rhs;
@@ -134,11 +135,26 @@ class UIRender {
       console.log(err);
     }
 
+    try { // deleted ais
+      if (diff.kind == 'D' && diff.path[4]=='AIs') {
+        // console.log('update AI fired');
+        // console.log(diff);
+        // console.log(path);
+        const id= diff.path[2];
+        const game=global.selfState.getGameByID(id);
+        // game.players.AIs[diff.path[5]]=diff.rhs;
+        // delete this ai from the game
+        delete game.players.AIs[diff.path[5]];
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
     try { // added chickens
       if (diff.kind == 'N' && diff.path[4]=='chickens') {
-        console.log('update chicken fired');
-        console.log(diff);
-        console.log(path);
+        // console.log('update chicken fired');
+        // console.log(diff);
+        // console.log(path);
         const id= diff.path[2];
         const game=global.selfState.getGameByID(id);
         game.players.chickens[diff.path[5]]=diff.rhs;
@@ -146,6 +162,22 @@ class UIRender {
     } catch (err) {
       console.log(err);
     }
+    // deleted chickens
+    try {
+      if (diff.kind == 'D' && diff.path[4]=='chickens') {
+        // console.log('update chicken fired');
+        // console.log(diff);
+        // console.log(path);
+        const id= diff.path[2];
+        const game=global.selfState.getGameByID(id);
+        // game.players.chickens[diff.path[5]]=diff.rhs;
+        // delete this chicken from the game
+        delete game.players.chickens[diff.path[5]];
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
     try { // ai changes teams
       if (diff.kind == 'E' && diff.path[6]=='team' && diff.path[4]=='AIs') {
         const id = diff.path[2];
@@ -186,6 +218,23 @@ class UIRender {
     } catch {
     }
 
+    try { // changes map
+      if (diff.kind == 'E' && diff.path[3]=='map') {
+        try {
+          const id = diff.path[2];
+          const game = global.selfState.getGameByID(id);
+          game.map=diff.rhs;
+          if (game.gameName==global.selfState.promethesys.sys.currentGame) {
+            prebattleUpdateMap(selfState.mapID2Name(diff.rhs))
+          }
+          lobbyLauncherInterfaceObj.lobbyLauncherDownloadAllMap();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    } catch {
+    }
+
     try { // game is exited
       if (diff.kind == 'E' && diff.path[3]=='isStarted' && diff.rhs==false) {
         try {
@@ -204,7 +253,7 @@ class UIRender {
     }
 
     refreshBtlFrd();
-    lobbyLauncherInterfaceObj.lobbyLauncherDownloadAllMap();
+    
   };
   // this chat should only be used to update chat members! chat description was set upon login and then lobby will alter the descs!
   updateChatsIndex = (diff, path) => {

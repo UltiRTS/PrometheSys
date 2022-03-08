@@ -60,8 +60,21 @@ class LauncherInterface {
         // parse the rest of the string into json
         pushSmolNotif('Neural Net ', 'Successfully constructed decision tree!');
         const mapDic = JSON.parse(String(data).slice(6));
+        if (selfState.promethesys.sys.mapDic){
+          for (const map in selfState.promethesys.sys.mapDic) {
+            try{
+              mapDic[map]=selfState.promethesys.sys.mapDic[map];
+            }
+            catch(err){
+            console.log('local map entry being removed from the remote index');
+            }
+          }
+        }
+
         selfState.promethesys.sys.mapDic = mapDic;
         selfState.promethesys.sys.storage.set('mapDic', mapDic);
+
+
       }
     });
   }
@@ -81,7 +94,7 @@ class LauncherInterface {
     for (const game in selfState.promethesys.game) {
       mapId2download=selfState.promethesys.game[game].map;
       for (const individualMap in selfState.promethesys.sys.mapDic) {
-        if (selfState.promethesys.sys.mapDic[individualMap].id == mapId2download) {
+        if (selfState.promethesys.sys.mapDic[individualMap].id.toString() == mapId2download) {
           console.log('trying to download map' + individualMap);
           // if (selfState.promethesys.sys.mapDic[individualMap].haveMap) {
           //  console.log('map already downloaded');
