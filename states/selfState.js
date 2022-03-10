@@ -1953,7 +1953,7 @@ class State {
       return 0;
     }
   }
-  setGameByName(gameName, mgrPort, mgrIP, isStarted, map, polls, players, id, engineToekn) {
+  setGame(gameName, mgrPort, mgrIP, isStarted, map, polls, players, id, engineToekn) {
     this.promethesys.game[gameName]={
       'gameName': gameName,
       'id': id,
@@ -1966,6 +1966,16 @@ class State {
       'engineToekn': engineToekn,
     };
   }
+
+  removeGameByID(id) {
+    for (let gameName in this.promethesys.game) {
+      if (this.promethesys.game[gameName].id==id) {
+        delete this.promethesys.game[gameName];
+      }
+    }
+  }
+
+
 
   updatePoll(gameID, pollKeyName, pollKeyValue) {
     const game = getGameByID(gameID);

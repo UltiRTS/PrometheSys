@@ -18,3 +18,7 @@ function lobbyzoneAppendBtl(battleid, map, title, founder) {
 </p>`;
   document.getElementById('gameEntry').appendChild(subEntry);
 }
+
+function lobbyzoneRemoveBtl(bID){
+  document.getElementById("battleEntry"+bID).parentNode.removeChild(document.getElementById("battleEntry"+bID));
+}
