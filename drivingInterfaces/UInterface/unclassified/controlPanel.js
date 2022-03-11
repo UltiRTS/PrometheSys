@@ -23,7 +23,7 @@ function toggleMapSelector() {
       setTimeout(()=>{
         if (selfState.promethesys.sys.mapDic[mapName].haveMap===true) {
           const singleMapHtmlString = `
-            <div style="position:relative;height: 61px;width: 49px;border-color: #2196f3;border-width: 5px;background:red;border-style: solid;display: inline-block;margin: 7px;"><img src="file://`+selfState.promethesys.sys.appPath+ `/ultiConfig/maps/`+mapName+`.png" style="height:100%;width:100%;position:absolute;" onclick='mapPickerPick('`+mapName+`')> </div>
+            <div style="position:relative;height: 61px;width: 49px;border-color: #2196f3;border-width: 5px;background:red;border-style: solid;display: inline-block;margin: 7px;"><img src="file://`+selfState.promethesys.sys.appPath+ `/ultiConfig/maps/`+mapName+`.png" style="height:100%;width:100%;position:absolute;" onclick="event.stopPropagation(); mapPickerPick('`+mapName+`')"> </div>
             `;
 
           const div = document.createElement('div');
