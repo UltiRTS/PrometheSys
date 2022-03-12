@@ -11,7 +11,7 @@ function personalToggleFullScreen() {
 
 function personalStatsSoundtempToggle() {
   if (selfState.promethesys.audio.contextGain.gain.value<=0.001) {
-    selfState.promethesys.audio.contextGain.gain.setValueAtTime(selfState..promethesys.audio.userVolume/100, selfState.promethesys.audio.audioCtx.currentTime);
+    selfState.promethesys.audio.contextGain.gain.setValueAtTime(selfState.promethesys.audio.userVolume/100, selfState.promethesys.audio.audioCtx.currentTime);
   } else {
     selfState.promethesys.audio.contextGain.gain.setValueAtTime(0.0001, selfState.promethesys.audio.audioCtx.currentTime);
   }
