@@ -293,7 +293,7 @@ class UIRender {
   /**
  *
  * @param {object} diffs deep-diff generated diffs
- */
+ *
   renderDiff(diffs) {
     for (const diff of diffs) {
       const path = diff.path;
@@ -309,29 +309,41 @@ class UIRender {
       }
     }
   }
+*/
+  renderDiff(diffObj){
+    // if the last element in diffObj.path[] is in functionTree, call it
+    const endVar = diffObj.path[diffObj.path.length-1];
+    if (this.functionTree[endVar]){
+      console.log('captured valid keys in server response:');
+      this.functionTree[endVar](diffObj, diffObj.path);
+    }
+    
 
-  nodeStructure = {
+
+  }
+
+
+
+functionTree ={
     action: this.nullFunc1,
     triggeredBy: this.nullFunc1,
-    paramaters: {
-      games: this.updateGame,
-      chatsIndex: this.updateChatsIndex,
-      poll: this.nullFunc1,
-      // team: this.nullFunc1,
-      AIs: this.nullFunc1,
-      notifications: this.nullFunc1,
-      usrstats: {
-        loggedIn: this.nullFunc1,
-        accLevel: this.nullFunc1,
-        chats: this.channelUpdate,
-        room: this.updateRoom,
-        team: this.nullFunc1,
-        fruneds: this.nullFunc1,
-        chatMsg: this.nullFunc1,
-        username: this.nullFunc1,
-      },
-    },
-  };
+    games: this.updateGame,
+    chatsIndex: this.updateChatsIndex,
+    poll: this.nullFunc1,
+    AIs: this.nullFunc1,
+    notifications: this.nullFunc1,
+    loggedIn: this.nullFunc1,
+    accLevel: this.nullFunc1,
+    chats: this.channelUpdate,
+    room: this.updateRoom,
+    team: this.nullFunc1,
+    fruneds: this.nullFunc1,
+    chatMsg: this.nullFunc1,
+    username: this.nullFunc1,
+    
+  }
+
+
 }
 
 module.exports = {
