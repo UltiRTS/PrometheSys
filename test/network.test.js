@@ -62,5 +62,8 @@ bus.on('lobbyServerMessage', (msg) => {
 
 bus.on('lobbyServerUpdate', (diffs) => {
   // console.log(diffs);
-  if (diffs) renderDiff(diffs);
+  if (diffs) {
+    console.log(diffs);
+    renderDiff(diffs);
+  }
 });

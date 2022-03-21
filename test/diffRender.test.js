@@ -15,7 +15,10 @@ const rhs = {
       chatMsg: [Array],
       username: 'test',
     },
-    games: ['game1', 'game2'],
+    games: [{
+      name: 'test1',
+      players: ['test'],
+    }],
     chatsIndex: {test: ['c1', 'c2']},
     poll: {},
     team: {},
@@ -37,7 +40,10 @@ const lhs = {
       chatMsg: [],
       username: 'test',
     },
-    games: [[]],
+    games: [{
+      name: 'test1',
+      players: ['test', 'test2'],
+    }],
     chatsIndex: {test: []},
     poll: {},
     team: {},
@@ -47,5 +53,5 @@ const lhs = {
 };
 
 const diffs = diff(lhs, rhs);
-// console.log(diffs);
-renderDiff(diffs);
+console.log(diffs);
+// renderDiff(diffs);

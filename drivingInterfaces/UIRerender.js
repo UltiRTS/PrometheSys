@@ -79,8 +79,8 @@ class UIRender {
         }
       }
 
-    } catch {
-
+    } catch (e) {
+      console.log(e);
     }
 
     try { // this disables prebtl panel and leaves chat
@@ -102,15 +102,15 @@ class UIRender {
 
     try {
      // this adds a game to the game list
-      if (diff.item.kind == 'N') {
-        global.selfState.setGame(diff.item.rhs.battleName, diff.item.rhs.port, diff.item.rhs.ip, diff.item.rhs.isStarted, diff.item.rhs.map, diff.item.rhs.polls, diff.item.rhs.players, diff.item.rhs.id, diff.item.rhs.engineToekn);
-        lobbyzoneAppendBtl(diff.item.rhs.id, diff.item.rhs.map, diff.item.rhs.battleName, diff.item.rhs.ip);
+      if (diff.kind == 'N') {
+        global.selfState.setGame(diff.rhs.battleName, diff.rhs.port, diff.rhs.ip, diff.rhs.isStarted, diff.rhs.map, diff.rhs.polls, diff.rhs.players, diff.rhs.id, diff.rhs.engineToekn);
+        lobbyzoneAppendBtl(diff.rhs.id, diff.rhs.map, diff.rhs.battleName, diff.rhs.ip);
       }
 
     // this removes a game from the game list
-      if (diff.item.kind == 'D' && diff.path[1] == 'games') {
-        lobbyzoneRemoveBtl(diff.item.lhs.id);
-        global.selfState.removeGameByID(diff.item.lhs.id);
+      if (diff.kind == 'D' && diff.path[1] == 'games') {
+        lobbyzoneRemoveBtl(diff.lhs.id);
+        global.selfState.removeGameByID(diff.lhs.id);
       }
 
      // another human joins a hosted game
@@ -161,6 +161,7 @@ class UIRender {
         // console.log('update chicken fired');
         // console.log(diff);
         // console.log(path);
+        console.log(diff);
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.chickens[diff.path[5]] = diff.rhs;
@@ -265,16 +266,18 @@ class UIRender {
           break;
         }
       }
-    }
+    }renderDiff
   }
  */
   renderDiff(diffs){
     // if the last element in diffObj.path[] is in functionTree, call it
+    console.log("diffs: ", diffs);
+    const fnTreeKeys = Object.keys(this.functionTree);
     for(const diffObj of diffs) {
-      const endVar = diffObj.path[diffObj.path.length-1];
-      if (this.functionTree[endVar]){
-        console.log('captured valid keys in server response:');
-        this.functionTree[endVar](diffObj, diffObj.path);
+      const intersection = fnTreeKeys.filter(key => diffObj.path.includes(key));
+      console.log("intersection: ", intersection);
+      for(const endpoint of intersection) {
+        this.functionTree[endpoint](diffObj, diffObj.path);
       }
     }
   }
