@@ -27,7 +27,6 @@ global.lobbyServerInterfaceObj = lobbyServerInterfaceObj;
 
 
 const {State} = require('./states/selfState');
-
 // const {remote} = require('electron');
 const Store = require('electron-store');
 const storage = new Store();

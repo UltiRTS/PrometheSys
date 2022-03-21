@@ -309,17 +309,16 @@ class UIRender {
       }
     }
   }
-*/
-  renderDiff(diffObj){
+ */
+  renderDiff(diffs){
     // if the last element in diffObj.path[] is in functionTree, call it
-    const endVar = diffObj.path[diffObj.path.length-1];
-    if (this.functionTree[endVar]){
-      console.log('captured valid keys in server response:');
-      this.functionTree[endVar](diffObj, diffObj.path);
+    for(const diffObj of diffs) {
+      const endVar = diffObj.path[diffObj.path.length-1];
+      if (this.functionTree[endVar]){
+        console.log('captured valid keys in server response:');
+        this.functionTree[endVar](diffObj, diffObj.path);
+      }
     }
-    
-
-
   }
 
 
