@@ -100,48 +100,39 @@ class UIRender {
     console.log(diff);
     // console.log(path);
 
-    try { // this adds a game to the game list
+    try {
+     // this adds a game to the game list
       if (diff.item.kind == 'N') {
         global.selfState.setGame(diff.item.rhs.battleName, diff.item.rhs.port, diff.item.rhs.ip, diff.item.rhs.isStarted, diff.item.rhs.map, diff.item.rhs.polls, diff.item.rhs.players, diff.item.rhs.id, diff.item.rhs.engineToekn);
         lobbyzoneAppendBtl(diff.item.rhs.id, diff.item.rhs.map, diff.item.rhs.battleName, diff.item.rhs.ip);
       }
-    } catch (err) {
-    }
 
     // this removes a game from the game list
-    try {
       if (diff.item.kind == 'D' && diff.path[1] == 'games') {
         lobbyzoneRemoveBtl(diff.item.lhs.id);
         global.selfState.removeGameByID(diff.item.lhs.id);
       }
-    } catch (err) {
-      // console.log(err);
-    }
 
-    try { // another human joins a hosted game
+     // another human joins a hosted game
       if (diff.kind == 'N' && diff.path[4] == 'players') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.players[diff.path[5]] = diff.rhs;
         refreshBtlFrd();
       }
-    } catch { }
-    try { // another human leaves a hosted game
+     // another human leaves a hosted game
       if (diff.kind == 'D' && diff.path[4] == 'players') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         delete game.players.players[diff.path[5]];
         refreshBtlFrd();
       }
-    } catch { }
-    try { // this catches poll number update
+     // this catches poll number update
       if (diff.kind == 'N' && diff.path[3] == 'polls') {
         const id = path[2];
         global.selfState.updatePoll(id, path[4], diff.rhs);
       }
-    } catch (err) {
-    }
-    try { // added ais
+     // added ais
       if (diff.kind == 'N' && diff.path[4] == 'AIs') {
         // console.log('update AI fired');
         // console.log(diff);
@@ -151,11 +142,8 @@ class UIRender {
         game.players.AIs[diff.path[5]] = diff.rhs;
         refreshBtlFrd();
       }
-    } catch (err) {
-      // console.log(err);
-    }
 
-    try { // deleted ais
+     // deleted ais
       if (diff.kind == 'D' && diff.path[4] == 'AIs') {
         // console.log('update AI fired');
         // console.log(diff);
@@ -167,11 +155,8 @@ class UIRender {
         delete game.players.AIs[diff.path[5]];
         refreshBtlFrd();
       }
-    } catch (err) {
-      // console.log(err);
-    }
 
-    try { // added chickens
+     // added chickens
       if (diff.kind == 'N' && diff.path[4] == 'chickens') {
         // console.log('update chicken fired');
         // console.log(diff);
@@ -181,11 +166,7 @@ class UIRender {
         game.players.chickens[diff.path[5]] = diff.rhs;
         refreshBtlFrd();
       }
-    } catch (err) {
-      // console.log(err);
-    }
     // deleted chickens
-    try {
       if (diff.kind == 'D' && diff.path[4] == 'chickens') {
         // console.log('update chicken fired');
         // console.log(diff);
@@ -197,38 +178,31 @@ class UIRender {
         delete game.players.chickens[diff.path[5]];
         refreshBtlFrd();
       }
-    } catch (err) {
-      // console.log(err);
-    }
 
-    try { // ai changes teams
+     // ai changes teams
       if (diff.kind == 'E' && diff.path[6] == 'team' && diff.path[4] == 'AIs') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.AIs[diff.path[5]].team = diff.rhs;
         refreshBtlFrd();
       }
-    } catch { }
-    try { // chicken changes teams
+     // chicken changes teams
       if (diff.kind == 'E' && diff.path[6] == 'team' && diff.path[4] == 'chickens') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.chickens[diff.path[5]].team = diff.rhs;
         refreshBtlFrd();
       }
-    } catch { }
-    try { // human changes teams
+     // human changes teams
       if (diff.kind == 'E' && diff.path[6] == 'team' && diff.path[4] == 'players') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.players[diff.path[5]].team = diff.rhs;
         refreshBtlFrd();
       }
-    } catch { }
 
-    try { // game is started
+     // game is started
       if (diff.kind == 'E' && diff.path[3] == 'isStarted' && diff.rhs == true) {
-        try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.isStarted = diff.rhs;
@@ -238,16 +212,10 @@ class UIRender {
             const mapName = selfState.mapID2Name(map);
             lobbyFlush(game.gameName, mapName);
           }
-        } catch (err) {
-          //console.log(err);
-        }
       }
-    } catch {
-    }
 
-    try { // changes map
+     // changes map
       if (diff.kind == 'E' && diff.path[3] == 'map') {
-        try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.map = diff.rhs;
@@ -255,16 +223,10 @@ class UIRender {
             prebattleUpdateMap(selfState.mapID2Name(diff.rhs))
           }
           lobbyLauncherInterfaceObj.lobbyLauncherDownloadAllMap();
-        } catch (err) {
-          // console.log(err);
-        }
       }
-    } catch {
-    }
 
-    try { // game is exited
+     // game is exited
       if (diff.kind == 'E' && diff.path[3] == 'isStarted' && diff.rhs == false) {
-        try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.isStarted = diff.rhs;
@@ -273,15 +235,11 @@ class UIRender {
             const mapName = selfState.mapID2Name(map);
             lobbyFlush(game.gameName, mapName);
           }
-        } catch (err) {
-          // console.log(err);
-        }
       }
-    } catch {
+
+    } catch(e) {
+      console.log(e);
     }
-
-
-
   };
   // this chat should only be used to update chat members! chat description was set upon login and then lobby will alter the descs!
   updateChatsIndex = (diff, path) => {
