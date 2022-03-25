@@ -133,7 +133,7 @@ function finalBoxEnlargeLeave() {
   document.getElementById('username').style.display='';
   selfState.isExited=true;
   lobbyServerInterfaceObj.joinChat('global');
-  console.log('finalBoxEnlargeLeave fired!');
+  // console.log('finalBoxEnlargeLeave fired!');
   pushSmolNotif('Dr. '+selfState.promethesys.sys.username, 'Welcome');
 }
 

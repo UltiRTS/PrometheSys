@@ -62,13 +62,13 @@ if (selfState.promethesys.sys.storage.has('userVolume')) {
 if (selfState.promethesys.sys.storage.has('userFXVolume')) {
   selfState.promethesys.audio.userFXVolume=selfState.promethesys.sys.storage.get('userFXVolume');
 } else {
-  selfState.promethesys.audio.userFXVolume=16;
+  selfState.promethesys.audio.userFXVolume=70;
 }
 
 if (selfState.promethesys.sys.storage.has('userNotifVolume')) {
   selfState.promethesys.audio.userNotifVolume=selfState.promethesys.sys.storage.get('userNotifVolume');
 } else {
-  selfState.promethesys.audio.userNotifVolume=16;
+  selfState.promethesys.audio.userNotifVolume=70;
 }
 
 if (!selfState.promethesys.sys.storage.has('mapCache')||selfState.promethesys.sys.storage.get('mapCache')==undefined) {

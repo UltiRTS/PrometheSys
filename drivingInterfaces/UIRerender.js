@@ -5,12 +5,9 @@ class UIRender {
     console.log('AT :', path);
     console.log(params);
   };
-
   nullFunc1 = (path, params) => {
-    console.log('');
+    // console.log('');
   };
-
-
   postLogin = (state) => {
     console.log(state);
     global.selfState.promethesys.sys.username = state.paramaters.usrstats.username;
@@ -26,16 +23,13 @@ class UIRender {
       lobbyzoneAppendBtl(game.id, game.map, game.battleName, game.ip);
     }
   };
-
-
   /**
  * Teresa's new function
  */
-
   channelUpdate(diff, path) {
-    console.log('channel update triggered: ');
-    console.log(diff);
-    console.log(path);
+    // console.log('channel update triggered: ');
+    // console.log(diff);
+    // console.log(path);
     if (diff.item.kind === 'N') {
       const channelName = diff.item.rhs;
       channelPut(channelName);
@@ -45,12 +39,9 @@ class UIRender {
       channelDel(channelName);
     }
   }
-
-
   chatMsgUpdate = (chatusr, chatmsg, chatchannel) => {
     msgPut([chatusr, chatmsg, chatchannel]);
   };
-
   // this will update prebtl panel once joined a battle
   updateRoom = (diff, path) => {
     // console.log('updateRoomList triggered: ');
@@ -78,11 +69,8 @@ class UIRender {
           refreshBtlFrd(); // game with their player list consistency maintained by updateGame, here we refresh battle freund when a client is in a game
         }
       }
-
-    } catch (e) {
-      console.log(e);
+    } catch {
     }
-
     try { // this disables prebtl panel and leaves chat
       if (diff.kind == 'E' && diff.rhs == null) {
         roomName = diff.rhs;
@@ -93,46 +81,51 @@ class UIRender {
     } catch {
     }
   };
-
   // this updates the game lists in mp menu
   updateGame = (diff, path) => {
-    console.log('updateGame fired');
-    console.log(diff);
+    // console.log('updateGame fired');
+    // console.log(diff);
     // console.log(path);
-
-    try {
-     // this adds a game to the game list
-      if (diff.kind == 'N') {
-        global.selfState.setGame(diff.rhs.battleName, diff.rhs.port, diff.rhs.ip, diff.rhs.isStarted, diff.rhs.map, diff.rhs.polls, diff.rhs.players, diff.rhs.id, diff.rhs.engineToekn);
-        lobbyzoneAppendBtl(diff.rhs.id, diff.rhs.map, diff.rhs.battleName, diff.rhs.ip);
+    try { // this adds a game to the game list
+      if (diff.item.kind == 'N') {
+        global.selfState.setGame(diff.item.rhs.battleName, diff.item.rhs.port, diff.item.rhs.ip, diff.item.rhs.isStarted, diff.item.rhs.map, diff.item.rhs.polls, diff.item.rhs.players, diff.item.rhs.id, diff.item.rhs.engineToekn);
+        lobbyzoneAppendBtl(diff.item.rhs.id, diff.item.rhs.map, diff.item.rhs.battleName, diff.item.rhs.ip);
       }
-
+    } catch (err) {
+    }
     // this removes a game from the game list
-      if (diff.kind == 'D' && diff.path[1] == 'games') {
-        lobbyzoneRemoveBtl(diff.lhs.id);
-        global.selfState.removeGameByID(diff.lhs.id);
+    try {
+      if (diff.item.kind == 'D' && diff.path[1] == 'games') {
+        lobbyzoneRemoveBtl(diff.item.lhs.id);
+        global.selfState.removeGameByID(diff.item.lhs.id);
       }
-
-     // another human joins a hosted game
+    } catch (err) {
+      // console.log(err);
+    }
+    try { // another human joins a hosted game
       if (diff.kind == 'N' && diff.path[4] == 'players') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.players[diff.path[5]] = diff.rhs;
         refreshBtlFrd();
       }
-     // another human leaves a hosted game
+    } catch { }
+    try { // another human leaves a hosted game
       if (diff.kind == 'D' && diff.path[4] == 'players') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         delete game.players.players[diff.path[5]];
         refreshBtlFrd();
       }
-     // this catches poll number update
+    } catch { }
+    try { // this catches poll number update
       if (diff.kind == 'N' && diff.path[3] == 'polls') {
         const id = path[2];
         global.selfState.updatePoll(id, path[4], diff.rhs);
       }
-     // added ais
+    } catch (err) {
+    }
+    try { // added ais
       if (diff.kind == 'N' && diff.path[4] == 'AIs') {
         // console.log('update AI fired');
         // console.log(diff);
@@ -142,8 +135,10 @@ class UIRender {
         game.players.AIs[diff.path[5]] = diff.rhs;
         refreshBtlFrd();
       }
-
-     // deleted ais
+    } catch (err) {
+      // console.log(err);
+    }
+    try { // deleted ais
       if (diff.kind == 'D' && diff.path[4] == 'AIs') {
         // console.log('update AI fired');
         // console.log(diff);
@@ -155,19 +150,24 @@ class UIRender {
         delete game.players.AIs[diff.path[5]];
         refreshBtlFrd();
       }
-
-     // added chickens
+    } catch (err) {
+      // console.log(err);
+    }
+    try { // added chickens
       if (diff.kind == 'N' && diff.path[4] == 'chickens') {
         // console.log('update chicken fired');
         // console.log(diff);
         // console.log(path);
-        console.log(diff);
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.chickens[diff.path[5]] = diff.rhs;
         refreshBtlFrd();
       }
+    } catch (err) {
+      // console.log(err);
+    }
     // deleted chickens
+    try {
       if (diff.kind == 'D' && diff.path[4] == 'chickens') {
         // console.log('update chicken fired');
         // console.log(diff);
@@ -179,31 +179,36 @@ class UIRender {
         delete game.players.chickens[diff.path[5]];
         refreshBtlFrd();
       }
-
-     // ai changes teams
+    } catch (err) {
+      // console.log(err);
+    }
+    try { // ai changes teams
       if (diff.kind == 'E' && diff.path[6] == 'team' && diff.path[4] == 'AIs') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.AIs[diff.path[5]].team = diff.rhs;
         refreshBtlFrd();
       }
-     // chicken changes teams
+    } catch { }
+    try { // chicken changes teams
       if (diff.kind == 'E' && diff.path[6] == 'team' && diff.path[4] == 'chickens') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.chickens[diff.path[5]].team = diff.rhs;
         refreshBtlFrd();
       }
-     // human changes teams
+    } catch { }
+    try { // human changes teams
       if (diff.kind == 'E' && diff.path[6] == 'team' && diff.path[4] == 'players') {
         const id = diff.path[2];
         const game = global.selfState.getGameByID(id);
         game.players.players[diff.path[5]].team = diff.rhs;
         refreshBtlFrd();
       }
-
-     // game is started
+    } catch { }
+    try { // game is started
       if (diff.kind == 'E' && diff.path[3] == 'isStarted' && diff.rhs == true) {
+        try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.isStarted = diff.rhs;
@@ -213,10 +218,15 @@ class UIRender {
             const mapName = selfState.mapID2Name(map);
             lobbyFlush(game.gameName, mapName);
           }
+        } catch (err) {
+          //console.log(err);
+        }
       }
-
-     // changes map
+    } catch {
+    }
+    try { // changes map
       if (diff.kind == 'E' && diff.path[3] == 'map') {
+        try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.map = diff.rhs;
@@ -224,10 +234,15 @@ class UIRender {
             prebattleUpdateMap(selfState.mapID2Name(diff.rhs))
           }
           lobbyLauncherInterfaceObj.lobbyLauncherDownloadAllMap();
+        } catch (err) {
+          // console.log(err);
+        }
       }
-
-     // game is exited
+    } catch {
+    }
+    try { // game is exited
       if (diff.kind == 'E' && diff.path[3] == 'isStarted' && diff.rhs == false) {
+        try {
           const id = diff.path[2];
           const game = global.selfState.getGameByID(id);
           game.isStarted = diff.rhs;
@@ -236,23 +251,21 @@ class UIRender {
             const mapName = selfState.mapID2Name(map);
             lobbyFlush(game.gameName, mapName);
           }
+        } catch (err) {
+          // console.log(err);
+        }
       }
-
-    } catch(e) {
-      console.log(e);
+    } catch {
     }
   };
   // this chat should only be used to update chat members! chat description was set upon login and then lobby will alter the descs!
   updateChatsIndex = (diff, path) => {
-    console.log('updateChatsIndex triggered: ');
-    console.log(diff);
-    console.log(path);
+    // console.log('updateChatsIndex triggered: ');
+    // console.log(diff);
+    // console.log(path);
     // frdPut(CHANME, user, 'A\'s gem');
   };
-  /**
- *
- * @param {object} diffs deep-diff generated diffs
- *
+
   renderDiff(diffs) {
     for (const diff of diffs) {
       const path = diff.path;
@@ -260,50 +273,35 @@ class UIRender {
       for (let i = 0; i < path.length; i++) {
         const nextNode = path[i];
         currentNode = currentNode[nextNode];
-
         if (typeof (currentNode) === 'function') {
+          console.log('current key(updated) is in intersection with the fn tree '+nextNode)
           currentNode(diff, path.join('.'));
           break;
         }
       }
-    }renderDiff
-  }
- */
-  renderDiff(diffs){
-    // if the last element in diffObj.path[] is in functionTree, call it
-    console.log("diffs: ", diffs);
-    const fnTreeKeys = Object.keys(this.functionTree);
-    for(const diffObj of diffs) {
-      const intersection = fnTreeKeys.filter(key => diffObj.path.includes(key));
-      console.log("intersection: ", intersection);
-      for(const endpoint of intersection) {
-        this.functionTree[endpoint](diffObj, diffObj.path);
-      }
     }
-  }
-
-
-
-functionTree ={
-    action: this.nullFunc1,
-    triggeredBy: this.nullFunc1,
-    games: this.updateGame,
-    chatsIndex: this.updateChatsIndex,
-    poll: this.nullFunc1,
-    AIs: this.nullFunc1,
-    notifications: this.nullFunc1,
-    loggedIn: this.nullFunc1,
-    accLevel: this.nullFunc1,
-    chats: this.channelUpdate,
-    room: this.updateRoom,
-    team: this.nullFunc1,
-    fruneds: this.nullFunc1,
-    chatMsg: this.nullFunc1,
-    username: this.nullFunc1,
-    
-  }
-
-
+  } nodeStructure = {
+    // action: this.nullFunc1,
+    // triggeredBy: this.nullFunc1,
+    paramaters: {
+      games: this.updateGame,
+      chatsIndex: this.updateChatsIndex,
+      // poll: this.nullFunc1,
+      // team: this.nullFunc1,
+      // AIs: this.nullFunc1,
+      // notifications: this.nullFunc1,
+      usrstats: {
+        // loggedIn: this.nullFunc1,
+        // accLevel: this.nullFunc1,
+        chats: this.channelUpdate,
+        room: this.updateRoom,
+        // team: this.nullFunc1,
+        // fruneds: this.nullFunc1,
+        chatMsg: this.nullFunc1,
+        // username: this.nullFunc1,
+      },
+    },
+  };
 }
 
 module.exports = {

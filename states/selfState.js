@@ -37,6 +37,10 @@ class State {
         allMinimapCache: storage.get('mapCache'),
       },
       audio: {
+        isFXPlaying: false,
+        FXTmpVolume: 0,
+        FXTmpDmpVolume:1,
+        FXaudio: null,
         isMusicPlaying: false,
         audioCtx: null,
         contextGain: null,
